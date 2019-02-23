@@ -4,4 +4,5 @@ Reading Notes about Book &lt;Patterns-Principles-and-Practices-of-Domain-Driven-
 
 ## Progress
 
-- [ ] Chapter05. Domain Model Implementation Patterns
+- [ ] Chapter 05. Domain Model Implementation Patterns
+- [ ] Chapter 12. Integrating via Messaging
