@@ -1,16 +1,21 @@
+// +build ignore
+
 package main
 
 import (
 	"net/http"
 
 	restful "github.com/emicklei/go-restful"
-	"github.com/sammyne/ppp-ddd/chapter13/app-restful/controllers"
+	acontroller "github.com/sammyne/ppp-ddd/chapter13/app-restful/account.management/controllers"
 )
 
-func entryPointService() *restful.WebService {
+func accountService() *restful.WebService {
 	service := new(restful.WebService)
 
-	service.Path("/accountmanagement").Route(service.GET("/").To(controllers.GetEntryPoint))
+	service.Path("/accountmanagement/accounts")
+
+	service.Route(service.GET("/").To(acontroller.Index))
+	service.Route(service.GET("/{accountID}").To(acontroller.Account))
 
 	return service
 }
@@ -21,10 +26,10 @@ func main() {
 	cors := restful.CrossOriginResourceSharing{Container: restful.DefaultContainer}
 	restful.Filter(cors.Filter)
 
-	restful.Add(entryPointService())
+	restful.Add(accountService())
 
 	server := &http.Server{
-		Addr:    "localhost:4100",
+		Addr:    "localhost:4101",
 		Handler: restful.DefaultContainer,
 	}
 

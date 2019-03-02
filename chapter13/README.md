@@ -166,6 +166,7 @@
 ###### URI Templates 
 - A common concern people have for hypermedia: **inefficient navigation**
 - To represent URI templates, not only do you need to set the `templated` attribute to `true`, but you must also add placeholder sections in the URI
+- The `alternative` link relation represents links that have a different URI but point to the same resource (`self`)
 
 ### Maintaining REST Applications
 #### Versioning

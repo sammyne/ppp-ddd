@@ -14,7 +14,7 @@ const (
 )
 
 func Index(req *restful.Request, resp *restful.Response) {
-	root := hal.NewResource(struct{}{}, accountsBaseURL)
+	root := hal.NewResource(struct{}{}, accountsBaseURL+"accounts")
 	root.AddLink("alternative", hal.NewLink(accountsBaseURL+"accounts?page=1"))
 	root.AddLink("account", hal.NewLink(accountsBaseURL+"accounts/{accountID}"))
 	root.AddLink("account", hal.NewLink(accountsBaseURL+"accounts/123"))
