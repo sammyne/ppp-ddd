@@ -3,20 +3,26 @@ package main
 import (
 	"net/http"
 
-	"github.com/sammyne/ppp-ddd/chapter13/app/account.management/controllers"
-	rcontrollers "github.com/sammyne/ppp-ddd/chapter13/app/discovery/controllers"
+	restful "github.com/emicklei/go-restful"
+	"github.com/sammyne/ppp-ddd/chapter13/app-restful/controllers"
 )
 
-func main() {
-	mux := http.NewServeMux()
+func entryPointService() *restful.WebService {
+	service := new(restful.WebService)
 
-	mux.HandleFunc("/api/accountmanagement", nil)
-	mux.HandleFunc("/api/followerdirectory/getusersfollowers", controllers.GetUsersFollowers)
-	mux.HandleFunc("/api/recommender/getrecommendedusers", rcontrollers.Users)
+	service.Path("/accountmanagement").Route(service.GET("/").To(controllers.GetEntryPoint))
+
+	return service
+}
+
+func main() {
+	//service := new
+	container := restful.NewContainer()
+	container.Add(entryPointService())
 
 	server := &http.Server{
-		Addr:    "localhost:3200",
-		Handler: mux,
+		Addr:    "localhost:4100",
+		Handler: container,
 	}
 
 	if err := server.ListenAndServe(); nil != err {
