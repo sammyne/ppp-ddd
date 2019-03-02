@@ -175,6 +175,8 @@
   - docker for run EventStrore daemon
   - PostMan for requesting and monitoring respones
 
+###### Publishing Events to an Atom Feed
+- Applications that publish events as an Atom feed are akin to message‐publishing components in a messaging system
 
 ### Maintaining REST Applications
 #### Versioning

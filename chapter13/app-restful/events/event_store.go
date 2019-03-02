@@ -3,6 +3,8 @@ package events
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
+	"io/ioutil"
 	"net/http"
 
 	uuid "github.com/satori/go.uuid"
@@ -43,6 +45,26 @@ func Persist(data interface{}) {
 			panic(err)
 		}
 	*/
+}
+
+func Retrieve(v interface{}) {
+	req, err := http.NewRequest("GET", eventStoreURL+"/streams/BeganFollowing", nil)
+	if nil != err {
+		panic(err)
+	}
+	req.Header.Set("Accept", "application/vnd.eventstore.atom+json")
+
+	resp, err := http.DefaultClient.Do(req)
+	if nil != err {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
+	out, err := ioutil.ReadAll(resp.Body)
+	if nil != err {
+		panic(err)
+	}
+	fmt.Printf("%s\n", out)
 }
 
 func NewEvent(data interface{}, eventType string) *Event {

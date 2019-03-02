@@ -20,7 +20,6 @@ type FollowersList struct {
 }
 
 func Followers(req *restful.Request, resp *restful.Response) {
-	fmt.Println("hello world")
 	id := req.PathParameter("accountID")
 	href := accountsBaseURL + "/" + id + "/followers"
 
