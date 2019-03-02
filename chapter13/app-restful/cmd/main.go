@@ -16,13 +16,12 @@ func entryPointService() *restful.WebService {
 }
 
 func main() {
-	//service := new
-	container := restful.NewContainer()
-	container.Add(entryPointService())
+	restful.DefaultResponseContentType(restful.MIME_JSON)
+	restful.Add(entryPointService())
 
 	server := &http.Server{
 		Addr:    "localhost:4100",
-		Handler: container,
+		Handler: restful.DefaultContainer,
 	}
 
 	if err := server.ListenAndServe(); nil != err {
