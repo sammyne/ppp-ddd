@@ -162,7 +162,10 @@
   - All links must be defined within an element at the root of the resource called `_links`
   - Each link begins with its relation (the **mandatory** `self` and `accounts` in the example)
   - Each link also contains an `href`, the URI pointing to the resource
-  - An example
+
+###### URI Templates 
+- A common concern people have for hypermedia: **inefficient navigation**
+- To represent URI templates, not only do you need to set the `templated` attribute to `true`, but you must also add placeholder sections in the URI
 
 ### Maintaining REST Applications
 #### Versioning

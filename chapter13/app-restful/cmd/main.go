@@ -4,8 +4,20 @@ import (
 	"net/http"
 
 	restful "github.com/emicklei/go-restful"
+	acontroller "github.com/sammyne/ppp-ddd/chapter13/app-restful/account.management/controllers"
 	"github.com/sammyne/ppp-ddd/chapter13/app-restful/controllers"
 )
+
+func accountService() *restful.WebService {
+	service := new(restful.WebService)
+
+	service.Path("/accountmanagement/accounts")
+
+	service.GET("/").To(acontroller.Index)
+	service.GET("/{accountID}").To(acontroller.Account)
+
+	return service
+}
 
 func entryPointService() *restful.WebService {
 	service := new(restful.WebService)
