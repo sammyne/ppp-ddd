@@ -168,6 +168,13 @@
 - To represent URI templates, not only do you need to set the `templated` attribute to `true`, but you must also add placeholder sections in the URI
 - The `alternative` link relation represents links that have a different URI but point to the same resource (`self`)
 
+> **WARNING** Model‐binding to domain classes or data structures used for persistence can lead to tight coupling. It is shown in Listing 13-19 for simplicity but is not recommended for important production applications.
+
+###### Persisting Events with the Event Store
+- Prerequisites
+  - docker
+
+
 ### Maintaining REST Applications
 #### Versioning
 #### Monitoring and Metrics
