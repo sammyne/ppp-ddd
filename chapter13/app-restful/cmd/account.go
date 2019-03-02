@@ -18,6 +18,7 @@ func accountService() *restful.WebService {
 	service.Route(service.GET("/").To(acontroller.Index))
 	service.Route(service.GET("/{accountID}").To(acontroller.Account))
 	service.Route(service.GET("/{accountID}/followers").To(controllers.Followers))
+	service.Route(service.POST("/{accountID}/followers").To(controllers.Follow))
 
 	return service
 }

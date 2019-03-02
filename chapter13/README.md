@@ -172,7 +172,8 @@
 
 ###### Persisting Events with the Event Store
 - Prerequisites
-  - docker
+  - docker for run EventStrore daemon
+  - PostMan for requesting and monitoring respones
 
 
 ### Maintaining REST Applications

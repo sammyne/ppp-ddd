@@ -16,18 +16,19 @@ type Event struct {
 	Data json.RawMessage `json:"data"`
 }
 
-//type EventPersister struct {
-//}
-
-//func (persister *EventPersister) Persist(data interface{}) {
 func Persist(data interface{}) {
-	eventJSON, _ := json.Marshal(NewEvent(data, "BeganFollowing"))
+	dataJSON, err := json.Marshal(data)
+	if nil != err {
+		panic(err)
+	}
 
-	req, err := http.NewRequest("POST", eventStoreURL+"/streams/BeganFollowing", bytes.NewReader(eventJSON))
+	req, err := http.NewRequest("POST", eventStoreURL+"/streams/BeganFollowing", bytes.NewReader(dataJSON))
 	if nil != err {
 		panic(err)
 	}
 	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("ES-EventId", uuid.Must(uuid.NewV4()).String())
+	req.Header.Set("ES-EventType", "BeganFollowing")
 	req.Header.Set("ES-CurrentVersion", "1")
 
 	resp, err := http.DefaultClient.Do(req)
@@ -35,6 +36,13 @@ func Persist(data interface{}) {
 		panic(err)
 	}
 	defer resp.Body.Close()
+
+	/*
+		out, err := ioutil.ReadAll(resp.Body)
+		if nil != err {
+			panic(err)
+		}
+	*/
 }
 
 func NewEvent(data interface{}, eventType string) *Event {

@@ -20,6 +20,7 @@ type FollowersList struct {
 }
 
 func Followers(req *restful.Request, resp *restful.Response) {
+	fmt.Println("hello world")
 	id := req.PathParameter("accountID")
 	href := accountsBaseURL + "/" + id + "/followers"
 
@@ -35,11 +36,13 @@ func Follow(req *restful.Request, resp *restful.Response) {
 	accountID := req.PathParameter("accountID")
 	followerID := req.QueryParameter("followerID")
 
+	//fmt.Println(accountID, followerID)
+
 	event := events.NewBeganFollowing(accountID, followerID)
 	events.Persist(event)
 
 	to := fmt.Sprintf("%s/%s/followers", accountsBaseURL, accountID)
-	http.Redirect(resp.ResponseWriter, req.Request, to, http.StatusOK)
+	http.Redirect(resp.ResponseWriter, req.Request, to, http.StatusSeeOther)
 }
 
 func dummyFollowerBriefs(id string) []*FollowerBrief {
