@@ -13,8 +13,8 @@ func accountService() *restful.WebService {
 
 	service.Path("/accountmanagement/accounts")
 
-	service.GET("/").To(acontroller.Index)
-	service.GET("/{accountID}").To(acontroller.Account)
+	service.Route(service.GET("/").To(acontroller.Index))
+	service.Route(service.GET("/{accountID}").To(acontroller.Account))
 
 	return service
 }
@@ -29,7 +29,9 @@ func entryPointService() *restful.WebService {
 
 func main() {
 	restful.DefaultResponseContentType(restful.MIME_JSON)
+
 	restful.Add(entryPointService())
+	restful.Add(accountService())
 
 	server := &http.Server{
 		Addr:    "localhost:4100",
