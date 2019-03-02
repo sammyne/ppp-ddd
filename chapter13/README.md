@@ -180,7 +180,17 @@
 
 ### Maintaining REST Applications
 #### Versioning
+- Ensure backward compatible 
+- Two options 
+  - Versioning a URI usually involves a prefix such as `/v2/api`
+  - versioning with a header may involve using the HTTP Version header like this: `Version: 2`
 #### Monitoring and Metrics
+- Tool: [StatsD](https://github.com/statsd/statsd)
 ### Drawbacks with REST for Bounded Context Integration
+> **NOTE** Please keep in mind that the drawbacks in this section are specifically about using REST for asynchronous, event‐driven applications. These drawbacks do not necessarily apply to the use of REST in other contexts
 #### Less Fault Tolerance Out of the Box
+- If the Event Store was unavailable during an attempt to store a Began Following event, there is no automatic recovery when the Event Store comes back online
+- One option to improve fault tolerance is to add store‐and‐forward mechanisms yourself
 #### Eventual Consistency 
+- Share‐nothing, loosely coupled systems that communicate asynchronously are always going to have a high susceptibility to eventual consistency. And Event-driven REST suffers from this
+- The newest events cannot be polled immediately
