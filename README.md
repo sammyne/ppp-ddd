@@ -6,3 +6,4 @@ Reading Notes about Book &lt;Patterns-Principles-and-Practices-of-Domain-Driven-
 
 - [ ] Chapter 05. Domain Model Implementation Patterns
 - [ ] Chapter 12. Integrating via Messaging
+- [ ] Chapter 13. Integrating via HTTP with RPC and REST
