@@ -1,11 +1,14 @@
-package controllers
+package events
 
 import (
+	"bytes"
 	"encoding/json"
 	"net/http"
 
 	uuid "github.com/satori/go.uuid"
 )
+
+const eventStoreURL = "http://localhost:2113"
 
 type Event struct {
 	ID   string          `json:"eventId"`
@@ -17,8 +20,10 @@ type Event struct {
 //}
 
 //func (persister *EventPersister) Persist(data interface{}) {
-func PersistEvent(data interface{}) {
-	req, err := http.NewRequest("POST", eventStoreURL+"/streams/BeganFollowing", nil)
+func Persist(data interface{}) {
+	eventJSON, _ := json.Marshal(NewEvent(data, "BeganFollowing"))
+
+	req, err := http.NewRequest("POST", eventStoreURL+"/streams/BeganFollowing", bytes.NewReader(eventJSON))
 	if nil != err {
 		panic(err)
 	}

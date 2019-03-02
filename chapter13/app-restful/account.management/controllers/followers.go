@@ -1,7 +1,10 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
+
+	"github.com/sammyne/ppp-ddd/chapter13/app-restful/events"
 
 	restful "github.com/emicklei/go-restful"
 	"github.com/nvellon/hal"
@@ -29,11 +32,14 @@ func Followers(req *restful.Request, resp *restful.Response) {
 func Follow(req *restful.Request, resp *restful.Response) {
 	// accountId will be taken from querystring - it is a simple type
 	// follower will be taken from request body - it is a complex type
-	//id := req.PathParameter("accountID")
+	accountID := req.PathParameter("accountID")
+	followerID := req.QueryParameter("followerID")
 
-	//event := &events.BeganFollowing{
-	//	AccountID: id,
-	//}
+	event := events.NewBeganFollowing(accountID, followerID)
+	events.Persist(event)
+
+	to := fmt.Sprintf("%s/%s/followers", accountsBaseURL, accountID)
+	http.Redirect(resp.ResponseWriter, req.Request, to, http.StatusOK)
 }
 
 func dummyFollowerBriefs(id string) []*FollowerBrief {
