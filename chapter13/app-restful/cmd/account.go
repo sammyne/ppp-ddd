@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	restful "github.com/emicklei/go-restful"
+	"github.com/sammyne/ppp-ddd/chapter13/app-restful/account.management/controllers"
 	acontroller "github.com/sammyne/ppp-ddd/chapter13/app-restful/account.management/controllers"
 )
 
@@ -16,6 +17,7 @@ func accountService() *restful.WebService {
 
 	service.Route(service.GET("/").To(acontroller.Index))
 	service.Route(service.GET("/{accountID}").To(acontroller.Account))
+	service.Route(service.GET("/{accountID}/followers").To(controllers.Followers))
 
 	return service
 }

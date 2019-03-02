@@ -9,12 +9,6 @@ import (
 	"github.com/sammyne/ppp-ddd/chapter13/app-restful/conf"
 )
 
-const (
-	entryPointBaseURL         = "http://localhost:4100/"
-	accountsManagementBaseURL = "http://localhost:4100/accountmanagement"
-	accountsBaseURL           = accountsManagementBaseURL + "/accounts"
-)
-
 type Item struct {
 	ID   string
 	Name string
