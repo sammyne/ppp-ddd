@@ -40,3 +40,12 @@ func (cmd *PlaceOrder) SetShippingTypeID(id string) {
 func (cmd *PlaceOrder) SetTimestamp(timestamp time.Time) {
 	cmd.timestamp = timestamp
 }
+
+func NewPlaceOrder(userID string, productIDs []string, shippingTypeID string) *PlaceOrder {
+	return &PlaceOrder{
+		userID,
+		productIDs,
+		shippingTypeID,
+		time.Now(),
+	}
+}

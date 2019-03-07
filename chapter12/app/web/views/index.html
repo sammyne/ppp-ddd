@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Place an Order</title>
+</head>
+
+<body>
+  <h1>Place an Order</h1>
+  <form method="post" action="/orders/place">
+    <p>
+      UserId: <input type="text" name="userId" />
+    </p>
+    <p>
+      ProductIds: <input type="text" name="productIds" />
+    </p>
+    <p>
+      ShippingTypeId: <input type="text" name="shippingTypeId" />
+    </p>
+    <input type="submit" value="Place order" />
+  </form>
+</body>
+
+</html>

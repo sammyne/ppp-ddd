@@ -63,12 +63,63 @@
 - Official Mirror of NATS is https://nats.io/
 
 ### Designing the System 
+- 3 steps 
+  0. The most important step is to start with the domain
+  1. Create a containers diagram showing 
+    - Application groupings
+    - Technology choices
+    - Communication protocols
+  2. Create a component diagram showing the flow of logic between bounded contexts
+
 #### Domain‐Driven Design
+- **Event Storming**: Start by identifying important events that occur in the domain
+
+##### Domain Events 
+- **DEFINITION**: Important events that occur in the real‐world domain
+
+##### Component Diagrams
+- Communication between domain events and processes can be depicted by basic sketches together using just boxes and lines
+- Component diagrams communicate the flow of logic or interaction between certain components 
+- A component diagram showing domain events goes as 
+  
+  ![A component diagram showing domain events](images/e-commerce-component-diagram.png)
+
 #### Containers Diagrams 
+- Before building the system, we need to map the requirements of the business onto a working, distributed software system that provides them value
+- Containers diagrams show
+  - How different parts of the system are grouped
+  - How different parts of the system communicate
+  - What the major technology choices are
+
+  > **NOTE** Major technology choices are ones that have a big impact on the development, delivery, or maintenance of a project. They are usually those that are harder to change. Generally, major technology choices are operating systems, programming languages/run times, web servers, middleware, and major application frameworks such as web frameworks or concurrency frameworks
+- A containers diagram of the e-commerce app goes as 
+  ![A containers diagram for a typical e‐commerce application](images/containers-diagram.png)
+
+  - Some key notes 
+    - Internal communication between bounded contexts uses messaging
+    - Unreliable communication with the external payment provider is wrapped with a messaging gateway to add reliability
+    - Each bounded context is able to use different technologies, including choice of database technology
+    - Bounded contexts do not share databases or other dependencies
+    - The website retrieves information from bounded contexts using the HTTP application programming interfaces (APIs) they provide via AJAX requests from the browser
+
+  > **WARNING** Try to keep diagrams concise and effective by maintaining all details at the same level of abstraction
+
 #### Evolutionary Architecture 
+
+- If new events are added to the domain or your context boundaries need to be adjusted, you should try to model your architecture around your new findings and update your diagrams accordingly
+
 ### Sending Commands from a Web Application 
-#### Creating a Web Application to Send Messages with NServiceBus 
+#### Creating a Web Application to Send Messages 
+- **A good convention**
+  - Each bounded context to have a project that contains just the messages it publishes
+  - Other bounded contexts can reference this project to access the messages
+
+  > **WARNING** Be careful that bounded contexts only share projects containing messages, to avoid the introduction of coupling by sharing more code.
+
 #### Sending Commands 
+- When sending commands, make sure you specify the recipient because commands are only handled in a single place
+- Specifying the recipients is not necessary when publishing events. This is a useful distinction to remember.
+
 ### Handling Commands and Publishing Events 
 #### Creating an NServiceBus Server to Handle Commands 
 #### Configuring the Solution for Testing and Debugging 
