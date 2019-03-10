@@ -142,8 +142,18 @@ cd web && go run main.go
 #### Publishing Events 
 #### Subscribing to Events 
 ### Making External HTTP Calls Reliable with Messaging Gateways 
+
+- Messaging gateways wrap unreliable communication with a message so that it can be retried until the stricken service is available again
+
 #### Messaging Gateways Improve Fault Tolerance 
+
+- Essentially, messaging gateways split one big transaction in half, so if one of the calls fails, you don't repeat actions that have already been carried out (like charging a customer's credit card)
+
 #### Implementing a Messaging Gateway 
+
+##### Start by Defining the Messages
+As Listing 12-10
+
 #### Controlling Message Retries 
 ### Eventual Consistency in Practice 
 #### Dealing with Inconsistency 
