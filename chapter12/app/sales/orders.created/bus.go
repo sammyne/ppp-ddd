@@ -1,4 +1,4 @@
-package controllers
+package created
 
 import nats "github.com/nats-io/go-nats"
 
@@ -10,4 +10,6 @@ func init() {
 	if nil != err {
 		panic(err)
 	}
+
+	broker.Subscribe("Sales.Orders.OrderCreated", HandlePlaceOrder)
 }

@@ -121,8 +121,24 @@
 - Specifying the recipients is not necessary when publishing events. This is a useful distinction to remember.
 
 ### Handling Commands and Publishing Events 
-#### Creating an NServiceBus Server to Handle Commands 
+
+- A naming convention: `{BoundedContext}.{BusinessComponent}.{Component}`
+- A useful convention for handling messages is to create a class called `{MessageName}Handler`
+
+#### Creating an Subscriber to Handle Commands 
 #### Configuring the Solution for Testing and Debugging 
+
+1. Start the `gnatsd` server
+```bash
+$GOPATH/bin/gnatsd
+```
+
+2. Bootstrap the web server
+
+```bash
+cd web && go run main.go
+```
+
 #### Publishing Events 
 #### Subscribing to Events 
 ### Making External HTTP Calls Reliable with Messaging Gateways 

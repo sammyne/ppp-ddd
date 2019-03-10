@@ -7,7 +7,8 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/orders", controllers.PlaceOrder)
+	http.HandleFunc("/orders", controllers.OrdersIndex)
+	http.HandleFunc("/orders/place", controllers.PlaceOrder)
 
 	if err := http.ListenAndServe(":8080", nil); nil != err {
 		panic(err)
