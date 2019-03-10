@@ -33,7 +33,7 @@ func HandlePlaceOrder(msg *nats.Msg) {
 		Amount:         calculateCost(cmd.ProductIDs),
 	}
 
-	bus.PublishTo(broker, "", event)
+	bus.PublishTo(broker, "universe", event)
 }
 
 func calculateCost(productIDs []string) float64 {
