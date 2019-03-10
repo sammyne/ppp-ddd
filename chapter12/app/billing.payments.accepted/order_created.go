@@ -27,5 +27,5 @@ func HandleOrderCreated(msg *nats.Msg) {
 		Status:  conf.Status,
 	}
 
-	bus.PublishTo(broker, "billing/local", cmd)
+	bus.PublishTo(broker, "/billing/local", cmd)
 }

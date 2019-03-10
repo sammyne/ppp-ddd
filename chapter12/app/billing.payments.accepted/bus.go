@@ -11,5 +11,6 @@ func init() {
 		panic(err)
 	}
 
-	broker.Subscribe("universe", HandleOrderCreated)
+	broker.Subscribe("/", HandleOrderCreated)
+	broker.Subscribe("/billing/local", HandleRecordPaymentAttempt)
 }
