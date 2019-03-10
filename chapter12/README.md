@@ -181,16 +181,59 @@ As Listing 12-10
     ![Multiple bounded contexts store the same piece of data locally](images/use-case-user-registration.png)
 
 #### Common Data Duplication Concerns 
+##### The Data Is Conceptually Different
+##### Avoid Inconsistencies by Using Validity Periods
+- **WHY**: Shared data is changed in one bounded context, but not synchronized simulatanously on other bounded context. 
+- **Example** goes as one price is shown online but charged differently when paid
+
+##### The Economics of Duplicating Data
+- Storage is so cheap, teams are normally happy to accept the costs of duplicating data so they can focus on delivering business value faster
+
+##### Messages Arriving Out of Order
+- General idea: simply put the message back on the queue and retry it again later
+
 ### Pulling It All Together in the UI 
 #### Business Components Need Their Own APIs 
+- The suggested layout goes as 
+  ![Business components have their own APIs](images/api-layout.png)
+
 #### Be Wary of Server‐Side Orchestration 
+- Server-side orchestration can undo a lot of the hard work of building a loosely coupled, fault‐tolerant system, because you have introduced another coupling point
+
 #### UI Composition with AJAX Data 
+- This style of UI composition can work especially well when you are trying to build fast, singe-page applications (SPAs) or generic APIs that are used by many other websites
+
 #### UI Composition with AJAX HTML 
+- It can be hard to manage the consistency of the page that would normally be easy to achieve when the HTML lived in a single file
+- This approach is also difficult to apply when multiple web applications share the API
+
 #### Sharing Your APIs with the Outside World 
 ## Maintaining a Messaging Application 
+
+- **WHY**: Find any errors that are occurring so you can fix them and prevent lost revenue
+- **HOW**: Employ a strategy for dealing with development changes that affect multiple teams, such as change in the structure of a domain event
+
 ### Message Versioning 
+
+- **WHY**
+  - The message format is the contract between two teams
+  - Any changes to the format may require input and collaboration from both teams
+
 #### Backward‐Compatible Message Versioning 
-#### Handling Versioning with NServiceBus's Polymorphic Handlers 
+
+- Concerning factors
+  - new fields
+  - deprecated fields
+
+#### Handling Versioning with Polymorphic Handlers 
+
+- The method described is applicable to languages supporting inheritance, and goes as 
+  1. Create a new version of the message that inherits the original version
+  2. Update handlers that require the new version to handle the new version
+  3. Add subscription details for the new message in each subscriber's App.config 
+  4. Update the sender to send the new version of the message.
+- For message encoded in JSON, we can simply add the new field to the structure
+
 ### Monitoring and Scaling 
 #### Monitoring Errors 
 #### Monitoring SLAs 

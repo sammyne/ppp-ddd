@@ -7,12 +7,13 @@ import (
 )
 
 func HandleOrderCreated(order *events.OrderCreated) {
-	fmt.Printf("Shipping BC storing: Order: %s, User: %s, Shipping Type: %s\n", order.ID, order.UserID, order.ShippingTypeID)
+	fmt.Printf("Shipping BC storing: Order: %s, User: %s, Address: %s, Shipping Type: %s\n", order.ID, order.UserID, order.AddressID, order.ShippingTypeID)
 
 	o := &ShippingOrder{
 		UserID:         order.UserID,
 		ID:             order.ID,
 		ShippingTypeID: order.ShippingTypeID,
+		AddressID:      order.AddressID,
 	}
 	addOrder(o)
 }

@@ -19,10 +19,9 @@ func HandlePlaceOrder(msg *nats.Msg) {
 		panic(err)
 	}
 
-	fmt.Printf("Order for Products: %s with shipping: %s made by user: %s\n",
-		strings.Join(cmd.ProductIDs, ","), cmd.ShippingTypeID, cmd.UserID)
-
 	orderID := saveOrder(cmd.ProductIDs, cmd.UserID, cmd.ShippingTypeID)
+	fmt.Printf("Created order %s for Products: %s with shipping: %s made by user: %s\n",
+		orderID, strings.Join(cmd.ProductIDs, ","), cmd.ShippingTypeID, cmd.UserID)
 
 	event := &events.OrderCreated{
 		ID:             orderID,
@@ -31,6 +30,7 @@ func HandlePlaceOrder(msg *nats.Msg) {
 		ShippingTypeID: cmd.ShippingTypeID,
 		Timestamp:      time.Now(),
 		Amount:         calculateCost(cmd.ProductIDs),
+		AddressID:      "AddressID123",
 	}
 
 	bus.PublishTo(broker, "/", event)

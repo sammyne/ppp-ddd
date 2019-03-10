@@ -9,4 +9,5 @@ type OrderCreated struct {
 	ShippingTypeID string
 	Timestamp      time.Time
 	Amount         float64
+	AddressID      string
 }

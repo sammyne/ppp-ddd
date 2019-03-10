@@ -4,4 +4,5 @@ type ShippingOrder struct {
 	UserID         string
 	ID             string
 	ShippingTypeID string
+	AddressID      string
 }

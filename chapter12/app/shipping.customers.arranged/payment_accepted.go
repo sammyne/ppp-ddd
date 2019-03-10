@@ -16,7 +16,7 @@ func HandlePaymentAccepted(event *events.PaymentAccepted) {
 		eventNew := &shippingevents.Arranged{OrderID: event.OrderID}
 
 		brokerJSON.Publish("/shipping", eventNew)
-		fmt.Printf("Shipping BC arranged shipping for Order: %s", event.OrderID)
+		fmt.Printf("Shipping BC arranged shipping for Order: %s to: %s", event.OrderID, address)
 		return
 	}
 
