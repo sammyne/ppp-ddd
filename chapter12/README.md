@@ -235,14 +235,40 @@ As Listing 12-10
 - For message encoded in JSON, we can simply add the new field to the structure
 
 ### Monitoring and Scaling 
+- **WHY**: Monitoring errors to ensure that users are getting an acceptable level of service
+
 #### Monitoring Errors 
+
+- Transient error: errors resolved after some time 
+- Poison messages: failing messages triggering the unsolvable errors no matter how many retrials
+- In case of persistent errors, manual intervention is required to determine what happens to it next
+
 #### Monitoring SLAs 
+
+- About measuring the rate and frequency of messages flowing through your system
+
 #### Scaling Out 
-## Integrating a Bounded Context with Mass Transit 
+
+- **WHEN**
+  - Messages are spending a long time in the queue
+  - The businesses are telling you that customers are complaining about slow turnaround times
+- **WHAT**: scale the system to process messages faster
+
+## Integrating a Bounded Context with another Messaging Framework 
+
+- **WHEN**: The new bounded isn't using the same messaging as the running ones
+- Pattern: **the messaging bridge**
+
 ### Messaging Bridge 
-### Mass Transit 
-#### Installing and Configuring Mass Transit 
-#### Declaring Messages for Use by Mass Transit 
+- **WHEN**: Two separate messaging systems that need to share messages
+- **HOW**: Create an application that can receive messages from one messaging system and hand them over to the other
+
+### [message-bus](https://github.com/vardius/message-bus)
+#### Installing 
+```bash
+go get -u -v github.com/vardius/message-bus
+```
+#### Declaring Messages for Use
 #### Creating a Message Handler 
 #### Subscribing to Events 
 #### Linking the Systems with a Messaging Bridge 
