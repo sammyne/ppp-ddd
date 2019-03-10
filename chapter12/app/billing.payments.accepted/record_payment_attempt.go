@@ -22,7 +22,8 @@ func HandleRecordPaymentAttempt(msg *nats.Msg) {
 		event := events.PaymentAccepted{
 			OrderID: attempt.OrderID,
 		}
-		bus.PublishTo(broker, "/payments", event)
+		//bus.PublishTo(broker, "/payments", event)
+		bus.PublishTo(broker, "Billing.Payments.PaymentAccepted", event)
 		fmt.Printf("Received payment accepted notification for Order: %s. Published PaymentAccepted event\n", attempt.OrderID)
 
 		return

@@ -157,11 +157,29 @@ As Listing 12-10
 ##### Then Implement Each Handler
 
 #### Controlling Message Retries 
+
+- Retrying mechanism isn't built-in in `go-nats`
+
 ### Eventual Consistency in Practice 
 #### Dealing with Inconsistency 
+- When you are in an inconsistent state, you need to roll forward into a new state that represents the wishes of the business or the real‐world domain processes you are modeling
+
 #### Rolling Forward into New States 
+
+- Use case: when a payment is rejected, it is the Sales team's responsibility to inform the customer the order was cancelled, whose partial component diagram goes as 
+  
+  ![The payment rejected use case](images/use-case-payment-rejected.png)
+
 ### Bounded Contexts Store All the Data They Need Locally 
+- **Problems**: How can you arrange shipping when all you have is the ID of an order
+  - option 1: RPC to `sales.customers` would introduce a temporal coupling
+  - option 2: publishing the customer's address on the `PaymentAccepted` event would cause high coupling and hard‐to‐debug issues trying to work out where data came from
+
 #### Storage Is Cheap—Keep a Local Copy 
+
+- Use case: the user registration process, depicted as 
+    ![Multiple bounded contexts store the same piece of data locally](images/use-case-user-registration.png)
+
 #### Common Data Duplication Concerns 
 ### Pulling It All Together in the UI 
 #### Business Components Need Their Own APIs 
