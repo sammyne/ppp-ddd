@@ -1,4 +1,4 @@
-package selected
+package promotions
 
 import "time"
 

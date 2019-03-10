@@ -264,14 +264,33 @@ As Listing 12-10
 - **HOW**: Create an application that can receive messages from one messaging system and hand them over to the other
 
 ### [message-bus](https://github.com/vardius/message-bus)
+
+The complete demo goes as [promotions.luckywinner](promotions.luckywinner)
+
 #### Installing 
 ```bash
 go get -u -v github.com/vardius/message-bus
 ```
 #### Declaring Messages for Use
+
+As [order_created.go](app/promotions.luckywinner/order_created.go)
+
 #### Creating a Message Handler 
+
+As [handler.go](app/promotions.luckywinner/handler.go) 
+
 #### Subscribing to Events 
+
+As [bus.go:13](app/promotions.luckywinner/bus.go)
+
 #### Linking the Systems with a Messaging Bridge 
+- A few concerns 
+  - Message formats between different frameworks 
+  - Go down a few levels of abstraction and deal with the queues yourself
 #### Publishing Events 
 #### Testing It Out 
-#### Where to Learn More about Mass Transit 
+
+Run the following projects one after one 
+- web 
+- sales 
+- promotions.luckywinner
