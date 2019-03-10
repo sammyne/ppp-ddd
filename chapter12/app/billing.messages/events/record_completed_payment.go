@@ -7,7 +7,7 @@ const (
 	Rejected
 )
 
-type RecordCompletedPayment struct {
+type RecordPaymentAttempt struct {
 	OrderID string
 	Status  PaymentStatus
 }

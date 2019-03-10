@@ -154,6 +154,8 @@ cd web && go run main.go
 ##### Start by Defining the Messages
 As Listing 12-10
 
+##### Then Implement Each Handler
+
 #### Controlling Message Retries 
 ### Eventual Consistency in Practice 
 #### Dealing with Inconsistency 
